@@ -1,0 +1,146 @@
+[
+  {
+    "image": "https://i.ibb.co/qRQfFrh/The-Great-Gatsby.jpg",
+    "name": "The Great Gatsby",
+    "authorName": "F. Scott Fitzgerald",
+    "category": "Fiction",
+    "rating": 4.5,
+    "quantity": 10,
+    "summary": "A classic novel about the American Dream and the Roaring Twenties, exploring themes of love, wealth, and the pursuit of happiness. Set in the glittering world of 1920s New York, it follows the enigmatic Jay Gatsby and his obsession with the elusive Daisy Buchanan. Through its lyrical prose, the novel delves into the excesses and disillusionment of the Jazz Age, revealing the complexities of human desires and the price of the unattainable. The Great Gatsby is a timeless portrayal of the American Dream's promises and its ultimate emptiness, making it a must-read for those who appreciate introspective and thought-provoking literature."
+  },
+  {
+    "image": "https://i.ibb.co/9ZFyL5s/To-Kill-a-Mockingbird.jpg",
+    "name": "To Kill a Mockingbird",
+    "authorName": "Harper Lee",
+    "category": "Fiction",
+    "rating": 4.7,
+    "quantity": 10,
+    "summary": "A powerful exploration of racial injustice and moral growth in the Deep South, as seen through the eyes of a young girl named Scout Finch. Set during the 1930s in the fictional town of Maycomb, Alabama, To Kill a Mockingbird is a poignant and unforgettable narrative that addresses themes of racial discrimination, compassion, and the loss of innocence. Through Scout's father, Atticus Finch, the novel raises questions of moral courage and empathy. It is a story of societal injustice and the human capacity for goodness. Harper Lee's novel is a compelling and beautifully written classic that continues to resonate with readers of all ages."
+  },
+  {
+    "image": "https://i.ibb.co/P5JRKMQ/1984.jpg",
+    "name": "1984",
+    "authorName": "George Orwell",
+    "category": "Fiction",
+    "rating": 4.4,
+    "quantity": 10,
+    "summary": "A dystopian masterpiece that explores the dangers of totalitarianism and the suppression of individualism in a bleak future. The story is set in the totalitarian state of Oceania, where the government exercises complete control over every aspect of citizens' lives. Through the eyes of the protagonist, Winston Smith, readers are introduced to the oppressive regime, thought control, and the manipulation of truth. 1984 is a warning against the consequences of totalitarianism and the erosion of personal freedom. George Orwell's thought-provoking and chilling narrative is a timeless work that raises critical questions about surveillance, propaganda, and the preservation of individuality."
+  },
+  {
+    "image": "https://i.ibb.co/kyDgYdY/Pride-and-Prejudice.jpg",
+    "name": "Pride and Prejudice",
+    "authorName": "Jane Austen",
+    "category": "Fiction",
+    "rating": 4.6,
+    "quantity": 10,
+    "summary": "A timeless classic about love, class, and societal norms in 19th-century England, with unforgettable characters and romantic intrigue. The novel introduces readers to Elizabeth Bennet, an independent and sharp-witted young woman, and Mr. Darcy, a wealthy and reserved gentleman. Through witty dialogue and social commentary, Jane Austen's masterpiece explores themes of marriage, prejudice, and the pursuit of true love. Pride and Prejudice is celebrated for its vivid characters and the enduring love story between Elizabeth and Mr. Darcy. It remains a beloved work of literature, known for its humor and insightful portrayal of societal expectations."
+  },
+  {
+    "image": "https://i.ibb.co/4N9BksW/Gone-Girl.jpg",
+    "name": "Gone Girl",
+    "authorName": "Gillian Flynn",
+    "category": "Mystery & Thriller",
+    "rating": 4.2,
+    "quantity": 10,
+    "summary": "A gripping tale of a troubled marriage, a mysterious disappearance, and dark secrets that will keep you guessing until the end. When Amy Dunne disappears on her fifth wedding anniversary, her husband Nick becomes the prime suspect. The narrative unfolds through the alternating perspectives of Nick and Amy, revealing the complexities of their relationship and the sinister undercurrents in their seemingly idyllic marriage. Gillian Flynn weaves a suspenseful and psychological thriller that explores themes of deceit, manipulation, and the hidden truths of a marriage gone wrong. Gone Girl is a page-turner that challenges perceptions and leaves readers questioning the characters' motives until the shocking conclusion."
+  },
+  {
+    "image": "https://i.ibb.co/Bj3JgtP/The-Girl-with-the-Dragon-Tattoo.jpg",
+    "name": "The Girl with the Dragon Tattoo",
+    "authorName": "Stieg Larsson",
+    "category": "Mystery & Thriller",
+    "rating": 4.3,
+    "quantity": 10,
+    "summary": "An international bestseller featuring complex characters and a compelling mystery, where a journalist and a hacker uncover dark conspiracies. Mikael Blomkvist, a journalist, and Lisbeth Salander, a brilliant hacker, team up to investigate a decades-old disappearance in a wealthy Swedish family. As they delve into the Vanger family's secrets, they unearth disturbing revelations and confront a web of violence, corruption, and dark conspiracies. Stieg Larsson's intricate and suspenseful novel is a riveting exploration of power, abuse, and revenge, featuring unforgettable characters and a gripping plot that will keep you engaged until the final page."
+  },
+  {
+    "image": "https://i.ibb.co/t2sBVNf/The-Da-Vinci-Code.jpg",
+    "name": "The Da Vinci Code",
+    "authorName": "Dan Brown",
+    "category": "Mystery & Thriller",
+    "rating": 4.0,
+    "quantity": 10,
+    "summary": "A fast-paced adventure that combines art, history, and suspense in a quest for a hidden secret that could change history. Robert Langdon, a Harvard professor of symbology, finds himself embroiled in a deadly puzzle after a murder at the Louvre Museum. Together with cryptologist Sophie Neveu, he races against time to decipher a series of clues that lead to a centuries-old secret. Dan Brown's international bestseller explores the intersection of religion, art, and science, delivering a thrilling and intellectual journey that challenges conventional beliefs and questions the foundation of history."
+  },
+  {
+    "image": "https://i.ibb.co/D1pDC01/Sharp-Objects.jpg",
+    "name": "Sharp Objects",
+    "authorName": "Gillian Flynn",
+    "category": "Mystery & Thriller",
+    "rating": 4.1,
+    "quantity": 10,
+    "summary": "A psychological thriller about a journalist returning to her hometown to cover the murder of two young girls, facing her own demons in the process. Camille Preaker, a troubled journalist, returns to her hometown to report on the murders of two preteen girls. As she investigates the killings, she is forced to confront her own traumatic past and her strained relationship with her family. Gillian Flynn's psychological thriller is a dark and twisted exploration of family dysfunction, trauma, and the power of secrets. Sharp Objects is a haunting and suspenseful narrative that will keep you on the edge of your seat."
+  },
+  {
+    "image": "https://i.ibb.co/xmGvRWX/Dune.jpg",
+    "name": "Dune",
+    "authorName": "Frank Herbert",
+    "category": "Science Fiction & Fantasy",
+    "rating": 4.8,
+    "quantity": 10,
+    "summary": "A sweeping epic set in a distant future on a desert planet, exploring themes of politics, religion, and environmentalism. Dune is the story of Paul Atreides, a young nobleman whose family controls the desert planet Arrakis, the only source of the spice melange—a substance that grants psychic abilities and holds immense power. As Paul becomes embroiled in the politics and power struggles of the universe, he must navigate a treacherous path to fulfill his destiny. Frank Herbert's masterwork is a complex and richly detailed saga that delves into themes of ecology, religion, and human potential, making it a cornerstone of science fiction literature."
+  },
+  {
+    "image": "https://i.ibb.co/gRPwh29/Ender-s-Game.jpg",
+    "name": "Ender's Game",
+    "authorName": "Orson Scott Card",
+    "category": "Science Fiction & Fantasy",
+    "rating": 4.4,
+    "quantity": 10,
+    "summary": "A science fiction classic about a gifted child in a battle school, chosen to lead humanity in an interstellar war. In a future where Earth faces an alien threat, talented children are trained in the Battle School to prepare for war. Among them is Ender Wiggin, a brilliant strategist with a unique perspective. Orson Scott Card's novel explores themes of leadership, empathy, and the consequences of war through the eyes of a child genius. Ender's Game is a thought-provoking and action-packed story that challenges conventional notions of heroism and warfare, leaving readers with ethical dilemmas to ponder."
+  },
+  {
+    "image": "https://i.ibb.co/RY2hXxp/The-Hobbit.jpg",
+    "name": "The Hobbit",
+    "authorName": "J.R.R. Tolkien",
+    "category": "Science Fiction & Fantasy",
+    "rating": 4.7,
+    "quantity": 10,
+    "summary": "A beloved adventure in the magical world of Middle-earth, following the journey of a reluctant hero and his companions. Bilbo Baggins, a hobbit, is swept into a grand adventure when he joins a group of dwarves on a quest to reclaim their homeland from the dragon Smaug. Their journey takes them through a fantastical realm filled with elves, trolls, and goblins. J.R.R. Tolkien's classic introduces readers to the magical land of Middle-earth and the heroic quest of Bilbo and his companions. The Hobbit is a timeless tale of bravery, friendship, and the allure of the unknown."
+  },
+  {
+    "image": "https://i.ibb.co/g6M1d9J/A-Song-of-Ice.jpg",
+    "name": "A Song of Ice and Fire",
+    "authorName": "George R.R. Martin",
+    "category": "Science Fiction & Fantasy",
+    "rating": 4.6,
+    "quantity": 10,
+    "summary": "An epic fantasy series with political intrigue and dragons, where noble families vie for power in a richly imagined world. The series weaves a complex tapestry of characters, each with their own ambitions and alliances. In a land where seasons can last for years and magic is real, the struggle for power and survival is brutal and unforgiving. George R.R. Martin's series is known for its intricate plotting, morally grey characters, and unexpected twists. A Song of Ice and Fire is a sprawling and engrossing narrative that immerses readers in a vivid and unpredictable world."
+  },
+  {
+    "image": "https://i.ibb.co/RycR3HX/Sapiens.jpg",
+    "name": "Sapiens: A Brief History of Humankind",
+    "authorName": "Yuval Noah Harari",
+    "category": "Non-Fiction",
+    "rating": 4.5,
+    "quantity": 2,
+    "summary": "Explore the journey of Homo sapiens from ancient foragers to modern rulers in 'Sapiens.' Yuval Noah Harari offers a captivating narrative that blends history, science, and philosophy to uncover the forces that have shaped human societies. From the Cognitive Revolution to the Agricultural Revolution and the rise of empires, Harari takes you on an illuminating ride through our shared history. Discover how myths, money, and politics have influenced our world and contemplate the challenges of the future. 'Sapiens' is a thought-provoking masterpiece that will reshape your perspective on humanity's past and future."
+  },
+  {
+    "image": "https://i.ibb.co/SBnjhKK/Becoming.jpg",
+    "name": "Becoming",
+    "authorName": "Michelle Obama",
+    "category": "Non-Fiction",
+    "rating": 4.7,
+    "quantity": 12,
+    "summary": "In 'Becoming,' Michelle Obama invites readers into her remarkable journey from her childhood in Chicago to the White House. With grace and honesty, she shares her personal and political experiences, highlighting her role as First Lady and the impact of her initiatives. Her memoir reflects on the importance of family, education, and public service. From her inspiring upbringing to her dedication to health and veterans' issues, Michelle's story is one of empowerment and hope. 'Becoming' is a testament to resilience and the pursuit of one's authentic self, making it an essential read for those seeking inspiration."
+  },
+  {
+    "image": "https://i.ibb.co/s1LmGqk/Educated.jpg",
+    "name": "Educated",
+    "authorName": "Tara Westover",
+    "category": "Non-Fiction",
+    "rating": 4.6,
+    "quantity": 10,
+    "summary": "Tara Westover's 'Educated' is a compelling memoir of her transformation from a girl raised in a strict and abusive household to a scholar at Cambridge University. Against all odds, Tara escapes her isolated and uneducated upbringing to pursue education, despite facing resistance from her family. Her journey is a testament to the power of learning and the resilience of the human spirit. 'Educated' raises questions about the value of knowledge, the impact of family, and the pursuit of self-discovery. It's an extraordinary story of a woman's quest for education and the consequences of breaking away from the past."
+  },
+  {
+    "image": "https://i.ibb.co/VB6g97T/7-SCENE.pnghttps://i.ibb.co/bgG4H4d/The-Immortal.webp",
+    "name": "The Immortal Life of Henrietta Lacks",
+    "authorName": "Rebecca Skloot",
+    "category": "Non-Fiction",
+    "rating": 4.3,
+    "quantity": 6,
+    "summary": "Dive into the riveting story of Henrietta Lacks, a woman whose cells were taken without her knowledge in the 1950s, leading to groundbreaking medical discoveries. Rebecca Skloot's 'The Immortal Life of Henrietta Lacks' explores the ethical and scientific implications of this event. It sheds light on Henrietta's life, the impact on her family, and the global scientific community. The book delves into the complex intersection of race, ethics, and medical research. Skloot's narrative is a blend of biography, medical history, and investigative journalism, making it a thought-provoking journey into the legacy of HeLa cells and the human stories behind them."
+  }
+]
