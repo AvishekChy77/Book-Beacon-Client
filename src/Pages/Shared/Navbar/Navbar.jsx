@@ -29,6 +29,9 @@ const Navbar = () => {
       <NavLink className="nav" to="/borrowedBooks">
         Borrowed Books
       </NavLink>
+      <NavLink className="nav" to="/request">
+        Request
+      </NavLink>
     </>
   );
   return (

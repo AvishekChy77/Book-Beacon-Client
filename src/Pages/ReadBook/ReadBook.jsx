@@ -1,7 +1,7 @@
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { useLoaderData, useParams } from "react-router-dom";
-import BookRating from "../CategoryCollection/BookRating";
 import { MyDocument } from "./PDFMaker";
+import BookRating from "../CategoryCollection/BookRating";
 
 const ReadBook = () => {
   const books = useLoaderData();

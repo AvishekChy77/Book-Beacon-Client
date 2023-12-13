@@ -7,9 +7,10 @@ import BorrowedBooks from "../Pages/BorrowedBooks/BorrowedBooks";
 import CategoryCollection from "../Pages/CategoryCollection/CategoryCollection";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home";
-import LogIn from "../Pages/Login/Login";
+import LogIn from "../Pages/LogIn/LogIn";
 import ReadBook from "../Pages/ReadBook/ReadBook";
 import Register from "../Pages/Register/Register";
+import RequestBook from "../Pages/RequestBook/RequestBook";
 import UpdateBook from "../Pages/UpdateBook/UpdateBook";
 import PrivateRoutes from "./PrivateRoutes";
 
@@ -83,6 +84,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoutes>
             <BorrowedBooks></BorrowedBooks>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/request",
+        element: (
+          <PrivateRoutes>
+            <RequestBook />
           </PrivateRoutes>
         ),
       },

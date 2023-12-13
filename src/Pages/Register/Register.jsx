@@ -4,12 +4,14 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useAuth from "../../Hooks/useAuth";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Register = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const { createUser, Auth } = useAuth();
   const location = useLocation();
   const goTo = useNavigate();
+  const axiosPublic = useAxiosPublic();
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -47,6 +49,17 @@ const Register = () => {
         })
           .then((res) => {
             // Profile information updated successfully
+            // add to db
+            const userInfo = {
+              name: displayName,
+              email: email,
+            };
+            axiosPublic.post("/users", userInfo).then((res) => {
+              if (res.data.insertedId) {
+                toast("Account created succesfully!");
+                goTo("/");
+              }
+            });
             console.log(res);
           })
           .catch((error) => {
