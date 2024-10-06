@@ -5,7 +5,7 @@ const Book = ({ book }) => {
   const { _id, authorName, image, name, category, rating } = book || {};
 
   return (
-    <div className=" relative rounded-lg shadow-xl">
+    <div className=" bg-zinc-50 relative rounded-lg shadow-xl">
       <div className="flex h-72  ">
         <figure>
           <img

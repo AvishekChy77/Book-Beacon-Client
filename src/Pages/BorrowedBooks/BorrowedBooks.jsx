@@ -77,7 +77,7 @@ const BorrowedBooks = () => {
                 .then((data) => console.log(data));
 
               Swal.fire(
-                "Deleted!",
+                "Success!",
                 "Your book has been returned, Thank you.",
                 "success"
               );

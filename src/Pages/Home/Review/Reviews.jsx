@@ -25,7 +25,7 @@ const Reviews = () => {
   });
   console.log(reviews);
   return (
-    <div className="my-10 max-w-3xl mx-auto">
+    <div className="my-20 max-w-3xl mx-auto">
       {/* <div className="flex gap-5 flex-col md:flex-row">
         <div className=" rounded shadow-lg bg-slate-50 p-3 flex flex-col">
           <div className="rating rating-sm">

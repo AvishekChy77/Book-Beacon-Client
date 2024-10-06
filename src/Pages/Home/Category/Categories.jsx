@@ -26,7 +26,7 @@ const Categories = () => {
 
   return (
     <div className="my-10 max-w-4xl p-4 mx-auto ">
-      <h2 className=" text-3xl font-extrabold text-center lg:text-4xl">
+      <h2 className=" text-3xl font-extrabold text-center lg:text-5xl">
         Categories
       </h2>
       {isFetching && (
