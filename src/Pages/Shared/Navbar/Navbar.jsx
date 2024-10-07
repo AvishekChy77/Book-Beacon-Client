@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import { useTheme } from "../../../Hooks/useTheme";
 import "./Navbar.css";
+import Navs from "./Navs";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -15,25 +16,7 @@ const Navbar = () => {
       .then()
       .catch((error) => console.log(error.message));
   };
-  const Navbar = (
-    <>
-      <NavLink className="nav" to="/">
-        Home
-      </NavLink>
-      <NavLink className="nav" to="/AddBook">
-        Add Book
-      </NavLink>
-      <NavLink className="nav" to="/allBooks">
-        All Books
-      </NavLink>
-      <NavLink className="nav" to="/borrowedBooks">
-        Borrowed Books
-      </NavLink>
-      <NavLink className="nav" to="/request">
-        Request
-      </NavLink>
-    </>
-  );
+
   return (
     <div className="navbar pt-1">
       <div className="w-2/3 md:w-1/2 navbar-start">
@@ -58,7 +41,7 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 Navbar rounded-box w-52"
           >
-            {Navbar}
+            <Navs />
           </ul>
         </div>
         <div className="font-YSerif flex items-center text-xl md:text-2xl lg:text-3xl font-bold">
@@ -75,7 +58,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal text-base md:text-lg font-medium flex gap-3 md:gap-7 Navbar">
-          {Navbar}
+          <Navs />
         </ul>
       </div>
       <div className="w-1/3 md:w-1/2 navbar-end">
@@ -107,7 +90,7 @@ const Navbar = () => {
           </div>
         ) : (
           <NavLink to="/login">
-            <button className="btn btn-sm btn-ghost">LogIn</button>
+            <button className="btn btn-sm btn-outline mr-5">LogIn</button>
           </NavLink>
         )}
         <button onClick={changeTheme}>
