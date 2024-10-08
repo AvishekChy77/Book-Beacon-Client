@@ -51,9 +51,9 @@ const AddBook = () => {
       <div className=" max-w-2xl mx-auto p-5 flex justify-center mb-10 bg-emerald-50 rounded-md shadow-xl">
         <form onSubmit={handleAdd}>
           <div className="flex flex-col md:flex-row gap-5 my-3 items-center">
-            <div className="form-control">
+            <div className="form-control md:w-1/2">
               <label className="label">
-                <span className="label-text">Book Name</span>
+                <span className="text-black label-text">Book Name</span>
               </label>
               <input
                 type="text"
@@ -63,9 +63,9 @@ const AddBook = () => {
                 required
               />
             </div>
-            <div className="form-control">
+            <div className="form-control md:w-1/2">
               <label className="label">
-                <span className="label-text">Author Name</span>
+                <span className="text-black label-text">Author Name</span>
               </label>
               <input
                 type="text"
@@ -77,11 +77,11 @@ const AddBook = () => {
             </div>
           </div>
           <div className="flex flex-col md:flex-row gap-5 my-3 items-center">
-            <div className="form-control">
+            <div className="form-control md:w-1/2">
               <label className="label">
-                <span className="label-text">Category</span>
+                <span className="text-black label-text">Category</span>
               </label>
-              <select id="category" name="category">
+              <select className="input" id="category" name="category">
                 <option value="Fiction">Fiction</option>
                 <option value="Mystery & Thriller">Mystery & Thriller</option>
                 <option value="Non-Fiction">Non-Fiction</option>
@@ -90,9 +90,9 @@ const AddBook = () => {
                 </option>
               </select>
             </div>
-            <div className="form-control">
+            <div className="form-control md:w-1/2">
               <label className="label">
-                <span className="label-text">Quantity</span>
+                <span className="text-black label-text">Quantity</span>
               </label>
               <input
                 type="text"
@@ -104,9 +104,9 @@ const AddBook = () => {
             </div>
           </div>
           <div className="flex flex-col md:flex-row gap-5 my-3 items-center">
-            <div className="form-control">
+            <div className="form-control md:w-1/2">
               <label className="label">
-                <span className="label-text">Image</span>
+                <span className="text-black label-text">Image</span>
               </label>
               <input
                 type="text"
@@ -116,9 +116,9 @@ const AddBook = () => {
                 required
               />
             </div>
-            <div className="form-control">
+            <div className="form-control md:w-1/2">
               <label className="label">
-                <span className="label-text">rating</span>
+                <span className="text-black label-text">rating</span>
               </label>
               <input
                 type="text"
@@ -135,10 +135,11 @@ const AddBook = () => {
               cols="33"
               defaultValue="Summary"
               name="summary"
+              className="p-2 rounded-lg"
             ></textarea>
           </div>
           <div className=" text-center">
-            <button className="btn btn-wide bg-blue-700 text-white font-semibold my-3">
+            <button className="my-5 btn w-full bg-white text-black btn-outline">
               Add Book
             </button>
           </div>

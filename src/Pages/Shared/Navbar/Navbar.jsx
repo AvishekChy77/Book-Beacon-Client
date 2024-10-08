@@ -63,7 +63,7 @@ const Navbar = () => {
       </div>
       <div className="w-1/3 md:w-1/2 navbar-end">
         {user?.email ? (
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end mr-5">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
                 <img src={user.photoURL} alt="" />

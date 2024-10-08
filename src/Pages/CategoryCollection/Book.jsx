@@ -5,20 +5,20 @@ const Book = ({ book }) => {
   const { _id, authorName, image, name, category, rating } = book || {};
 
   return (
-    <div className=" bg-zinc-50 relative rounded-lg shadow-xl">
-      <div className="flex h-72  ">
+    <div className=" bg-lime-100 text-black relative rounded-lg shadow-xl">
+      <div className="flex h-72">
         <figure>
           <img
             src={image}
             alt=""
-            className="rounded-l-lg h-full w-40  object-cover"
+            className="rounded-l-lg h-full w-40 object-cover"
           />
         </figure>
-        <div className="card-body p-4  items-center text-center">
+        <div className="card-body p-4 items-center text-center">
           <h2 className="card-title grow">{name}</h2>
           <p>Author: {authorName}</p>
           <p>Category: {category}</p>
-          <p className=" ">
+          <p>
             Rating: <BookRating rating={rating}></BookRating>
           </p>
         </div>

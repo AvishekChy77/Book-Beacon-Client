@@ -15,7 +15,7 @@ const RequestBook = () => {
         >
           <div className=" grid md:grid-cols-2 gap-4 w-full py-2">
             <div className="flex flex-col">
-              <label className=" uppercase  text-sm py-2">Name</label>
+              <label className="text-black uppercase  text-sm py-2">Name</label>
               <input
                 className=" border-2 rounded-lg p-3 flex "
                 type="text"
@@ -24,7 +24,7 @@ const RequestBook = () => {
               />
             </div>
             <div className="flex flex-col">
-              <label className=" uppercase  text-sm py-2">Phone</label>
+              <label className="text-black uppercase  text-sm py-2">Phone</label>
               <input
                 className=" border-2 rounded-lg p-3 flex "
                 type="text"
@@ -33,7 +33,7 @@ const RequestBook = () => {
             </div>
           </div>
           <div className="flex flex-col py-2">
-            <label className=" uppercase  text-sm py-2">Email</label>
+            <label className="text-black uppercase  text-sm py-2">Email</label>
             <input
               className=" border-2 rounded-lg p-3 flex "
               type="email"
@@ -42,7 +42,7 @@ const RequestBook = () => {
             />
           </div>
           <div className="flex flex-col py-2">
-            <label className=" uppercase  text-sm py-2">Subject</label>
+            <label className="text-black uppercase  text-sm py-2">Subject</label>
             <input
               className=" border-2 rounded-lg p-3 flex "
               type="text"
@@ -50,7 +50,7 @@ const RequestBook = () => {
             />
           </div>
           <div className="flex flex-col py-2">
-            <label className=" uppercase  text-sm py-2">Message</label>
+            <label className="text-black uppercase  text-sm py-2">Message</label>
             <textarea
               className=" border-2 rounded-lg p-3 "
               rows={10}
