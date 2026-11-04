@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa6";
 import { Link, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import { API_URL } from "../../api";
 import Loading from "../../Components/Loading";
 import { PageTransition } from "../../Components/Motion";
 import useAuth from "../../Hooks/useAuth";
@@ -68,7 +69,7 @@ const BookDetails = () => {
       purchasedDate,
     };
 
-    const res = await fetch("https://book-beacon-server.vercel.app/borrowed", {
+    const res = await fetch(`${API_URL}/borrowed`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(userData),
@@ -84,7 +85,7 @@ const BookDetails = () => {
       });
       setQuant(quant - 1);
       setCount(1);
-      await fetch(`https://book-beacon-server.vercel.app/books/${id}`, {
+      await fetch(`${API_URL}/books/${id}`, {
         method: "PATCH",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ quantity: quantity - 1 }),

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { FaBookMedical, FaImage } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import { API_URL } from "../../api";
 import { PageTransition } from "../../Components/Motion";
 import PageBanner from "../../Components/PageBanner";
 
@@ -30,7 +31,7 @@ const AddBook = () => {
     };
 
     setSubmitting(true);
-    fetch("https://book-beacon-server.vercel.app/books", {
+    fetch(`${API_URL}/books`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(newBook),

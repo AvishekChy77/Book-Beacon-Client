@@ -1,20 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import useAxiosPublic from "./useAxiosPublic";
 
 const useCategory = () => {
-  const { data, isLoading, isFetching } = useQuery({
+  const axiosPublic = useAxiosPublic();
+  const { data, isLoading, isFetching, isError, refetch } = useQuery({
     queryKey: ["combineData"],
     queryFn: async () => {
-      const res1 = await axios.get(
-        "https://book-beacon-server.vercel.app/category"
-      );
-      const res2 = await axios.get(
-        "https://book-beacon-server.vercel.app/books"
-      );
+      const [res1, res2] = await Promise.all([
+        axiosPublic.get("/category"),
+        axiosPublic.get("/books"),
+      ]);
       return { category: res1.data, books: res2.data };
     },
   });
-  return { data, isLoading, isFetching };
+  return { data, isLoading, isFetching, isError, refetch };
 };
 
 export default useCategory;

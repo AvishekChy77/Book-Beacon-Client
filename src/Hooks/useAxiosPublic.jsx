@@ -1,7 +1,8 @@
 import axios from "axios";
+import { API_URL } from "../api";
 
 const axiosPublic = axios.create({
-  baseURL: "https://book-beacon-server.vercel.app",
+  baseURL: API_URL,
 });
 const useAxiosPublic = () => {
   return axiosPublic;

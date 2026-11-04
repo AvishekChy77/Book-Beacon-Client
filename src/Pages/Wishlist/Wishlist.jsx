@@ -13,7 +13,7 @@ const Wishlist = () => {
   const axiosPublic = useAxiosPublic();
   const { wishlist } = useWishlist();
 
-  const { data: books, isLoading } = useQuery({
+  const { data: books, isLoading, isError, refetch } = useQuery({
     queryKey: ["all-books"],
     queryFn: async () => {
       const res = await axiosPublic.get("/books");
@@ -36,6 +36,14 @@ const Wishlist = () => {
         <div className="mt-10">
           <GridSkeleton count={4} />
         </div>
+      ) : isError ? (
+        <EmptyState
+          icon="📡"
+          title="The library is unreachable"
+          message="We couldn't load your saved books — the database may be waking up. Please try again in a moment."
+          actionText="Try again"
+          onAction={() => refetch()}
+        />
       ) : saved.length === 0 ? (
         <EmptyState
           icon={<FaHeart className="text-rose-500" />}

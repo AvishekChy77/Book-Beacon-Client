@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-const EmptyState = ({ icon, title, message, actionText, actionTo }) => (
+const EmptyState = ({ icon, title, message, actionText, actionTo, onAction }) => (
   <motion.div
     initial={{ opacity: 0, scale: 0.95 }}
     animate={{ opacity: 1, scale: 1 }}
@@ -13,7 +13,12 @@ const EmptyState = ({ icon, title, message, actionText, actionTo }) => (
     </div>
     <h3 className="font-display mt-5 text-xl font-bold">{title}</h3>
     <p className="mt-2 text-sm text-base-content/60">{message}</p>
-    {actionText && actionTo && (
+    {actionText && onAction && (
+      <button onClick={onAction} className="btn-brand btn-sm mt-6 rounded-xl px-6">
+        {actionText}
+      </button>
+    )}
+    {actionText && actionTo && !onAction && (
       <Link to={actionTo} className="btn-brand btn-sm mt-6 rounded-xl px-6">
         {actionText}
       </Link>

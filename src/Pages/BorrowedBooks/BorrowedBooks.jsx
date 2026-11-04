@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { FaCalendarDay, FaRotateLeft } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import { API_URL } from "../../api";
 import EmptyState from "../../Components/EmptyState";
 import { GridSkeleton } from "../../Components/Loading";
 import { fadeUp, PageTransition, stagger } from "../../Components/Motion";
@@ -21,7 +22,7 @@ const BorrowedBooks = () => {
   const axiosPublic = useAxiosPublic();
   const [borrowedBooks, setBorrowedBooks] = useState([]);
 
-  const { isLoading } = useQuery({
+  const { isLoading, isError, refetch } = useQuery({
     queryKey: ["borrowed", user?.email],
     queryFn: async () => {
       const res = await axiosPublic.get(`/borrow?email=${user.email}`);
@@ -41,7 +42,7 @@ const BorrowedBooks = () => {
       confirmButtonText: "Yes, return it",
     }).then((result) => {
       if (!result.isConfirmed) return;
-      fetch(`https://book-beacon-server.vercel.app/borrowed/${id}`, {
+      fetch(`${API_URL}/borrowed/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -51,14 +52,11 @@ const BorrowedBooks = () => {
             const bookArray = await axiosPublic.get("/books");
             const book = bookArray?.data?.find((b) => b.name === name);
             if (book) {
-              await fetch(
-                `https://book-beacon-server.vercel.app/books/${book._id}`,
-                {
-                  method: "PATCH",
-                  headers: { "content-type": "application/json" },
-                  body: JSON.stringify({ quantity: book.quantity + 1 }),
-                }
-              );
+              await fetch(`${API_URL}/books/${book._id}`, {
+                method: "PATCH",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify({ quantity: book.quantity + 1 }),
+              });
             }
             Swal.fire({
               title: "Returned!",
@@ -85,6 +83,14 @@ const BorrowedBooks = () => {
         <div className="mt-10">
           <GridSkeleton count={3} />
         </div>
+      ) : isError ? (
+        <EmptyState
+          icon="📡"
+          title="The library is unreachable"
+          message="We couldn't load your borrowed books — the database may be waking up. Please try again in a moment."
+          actionText="Try again"
+          onAction={() => refetch()}
+        />
       ) : borrowedBooks.length === 0 ? (
         <EmptyState
           icon="📖"

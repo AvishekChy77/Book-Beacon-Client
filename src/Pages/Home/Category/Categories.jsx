@@ -7,13 +7,16 @@ import Category from "./Category";
 
 const Categories = () => {
   const axiosPublic = useAxiosPublic();
-  const { isLoading, data: categories } = useQuery({
+  const { isLoading, isError, data: categories } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
       const res = await axiosPublic.get("/category");
       return res.data;
     },
   });
+
+  // hide the section gracefully when the API is unreachable
+  if (isError || (!isLoading && !categories?.length)) return null;
 
   return (
     <Section className="container mx-auto px-4 py-20">

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { FaFloppyDisk } from "react-icons/fa6";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { API_URL } from "../../api";
 import { PageTransition } from "../../Components/Motion";
 import PageBanner from "../../Components/PageBanner";
 
@@ -30,7 +31,7 @@ const UpdateBook = () => {
       rating: Number(form.rating.value),
     };
 
-    fetch(`https://book-beacon-server.vercel.app/book/${_id}`, {
+    fetch(`${API_URL}/book/${_id}`, {
       method: "PATCH",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(updatedBook),

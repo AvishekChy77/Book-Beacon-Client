@@ -9,7 +9,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const FeaturedBooks = () => {
   const axiosPublic = useAxiosPublic();
-  const { isLoading, data: books } = useQuery({
+  const { isLoading, isError, data: books } = useQuery({
     queryKey: ["featured-books"],
     queryFn: async () => {
       const res = await axiosPublic.get("/books");
@@ -20,6 +20,9 @@ const FeaturedBooks = () => {
   const featured = [...(books || [])]
     .sort((a, b) => Number(b.rating || 0) - Number(a.rating || 0))
     .slice(0, 8);
+
+  // hide the section gracefully when the API is unreachable
+  if (isError || (!isLoading && featured.length === 0)) return null;
 
   return (
     <Section className="relative py-20">

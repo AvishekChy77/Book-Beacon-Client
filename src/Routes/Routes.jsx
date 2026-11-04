@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
+import { API_URL } from "../api";
 import Loading from "../Components/Loading";
 import Root from "../Layouts/Root";
 import AddBook from "../Pages/AddBook/AddBook";
@@ -64,8 +65,7 @@ const router = createBrowserRouter([
             <UpdateBook></UpdateBook>
           </PrivateRoutes>
         ),
-        loader: ({ params }) =>
-          fetch(`https://book-beacon-server.vercel.app/books/${params.id}`),
+        loader: ({ params }) => fetch(`${API_URL}/books/${params.id}`),
       },
       {
         path: "/book/:id",
@@ -84,7 +84,7 @@ const router = createBrowserRouter([
             </Suspense>
           </PrivateRoutes>
         ),
-        loader: () => fetch("https://book-beacon-server.vercel.app/books"),
+        loader: () => fetch(`${API_URL}/books`),
       },
       {
         path: "/borrowedBooks",

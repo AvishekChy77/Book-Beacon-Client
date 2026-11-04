@@ -32,7 +32,7 @@ const AllBooks = () => {
   const [availableOnly, setAvailableOnly] = useState(false);
   const [view, setView] = useState("grid");
 
-  const { data: books, isLoading } = useQuery({
+  const { data: books, isLoading, isError, refetch } = useQuery({
     queryKey: ["all-books"],
     queryFn: async () => {
       const res = await axiosPublic.get("/books");
@@ -144,15 +144,26 @@ const AllBooks = () => {
         </div>
       </motion.div>
 
-      <p className="mt-8 px-2 text-sm text-base-content/50 md:px-6">
-        Showing <span className="font-bold text-base-content">{filtered.length}</span>{" "}
-        of {books?.length || 0} books
-      </p>
+      {!isError && (
+        <p className="mt-8 px-2 text-sm text-base-content/50 md:px-6">
+          Showing{" "}
+          <span className="font-bold text-base-content">{filtered.length}</span> of{" "}
+          {books?.length || 0} books
+        </p>
+      )}
 
       {isLoading ? (
         <div className="mt-6">
           <GridSkeleton count={8} />
         </div>
+      ) : isError ? (
+        <EmptyState
+          icon="📡"
+          title="The library is unreachable"
+          message="We couldn't load the books — the database may be waking up. Please try again in a moment."
+          actionText="Try again"
+          onAction={() => refetch()}
+        />
       ) : filtered.length === 0 ? (
         <EmptyState
           icon="🔍"

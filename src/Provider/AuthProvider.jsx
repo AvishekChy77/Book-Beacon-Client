@@ -9,6 +9,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
+import { API_URL } from "../api";
 import app from "../Firebase/firebase.config";
 
 export const AuthContext = createContext(null);
@@ -49,15 +50,11 @@ const AuthProvider = ({ children }) => {
       // if user exists then provide token
       if (currentUser) {
         axios
-          .post("https://book-beacon-server.vercel.app/jwt", loggedUser, {
-            withCredentials: true,
-          })
+          .post(`${API_URL}/jwt`, loggedUser, { withCredentials: true })
           .catch(() => {});
       } else {
         axios
-          .post("https://book-beacon-server.vercel.app/logout", loggedUser, {
-            withCredentials: true,
-          })
+          .post(`${API_URL}/logout`, loggedUser, { withCredentials: true })
           .catch(() => {});
       }
     });

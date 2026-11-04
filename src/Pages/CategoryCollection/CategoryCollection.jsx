@@ -9,7 +9,7 @@ import useCategory from "../../Hooks/useCategory";
 
 const CategoryCollection = () => {
   const { id } = useParams();
-  const { data, isLoading } = useCategory();
+  const { data, isLoading, isError, refetch } = useCategory();
 
   const categories = data?.category;
   const sCategory = categories?.find((c) => c._id === id);
@@ -30,6 +30,14 @@ const CategoryCollection = () => {
         <div className="mt-10">
           <GridSkeleton count={8} />
         </div>
+      ) : isError ? (
+        <EmptyState
+          icon="📡"
+          title="The library is unreachable"
+          message="We couldn't load this collection — the database may be waking up. Please try again in a moment."
+          actionText="Try again"
+          onAction={() => refetch()}
+        />
       ) : !books?.length ? (
         <EmptyState
           icon="📚"
