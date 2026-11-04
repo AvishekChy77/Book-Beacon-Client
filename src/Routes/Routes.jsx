@@ -1,4 +1,6 @@
+import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
+import Loading from "../Components/Loading";
 import Root from "../Layouts/Root";
 import AddBook from "../Pages/AddBook/AddBook";
 import AllBooks from "../Pages/AllBooks/AllBooks";
@@ -8,11 +10,14 @@ import CategoryCollection from "../Pages/CategoryCollection/CategoryCollection";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home";
 import LogIn from "../Pages/LogIn/LogIn";
-import ReadBook from "../Pages/ReadBook/ReadBook";
 import Register from "../Pages/Register/Register";
 import RequestBook from "../Pages/RequestBook/RequestBook";
 import UpdateBook from "../Pages/UpdateBook/UpdateBook";
+import Wishlist from "../Pages/Wishlist/Wishlist";
 import PrivateRoutes from "./PrivateRoutes";
+
+// @react-pdf/renderer is heavy — load the reading page on demand
+const ReadBook = lazy(() => import("../Pages/ReadBook/ReadBook"));
 
 const router = createBrowserRouter([
   {
@@ -74,7 +79,9 @@ const router = createBrowserRouter([
         path: "/read/:id",
         element: (
           <PrivateRoutes>
-            <ReadBook></ReadBook>
+            <Suspense fallback={<Loading />}>
+              <ReadBook />
+            </Suspense>
           </PrivateRoutes>
         ),
         loader: () => fetch("https://book-beacon-server.vercel.app/books"),
@@ -94,6 +101,10 @@ const router = createBrowserRouter([
             <RequestBook />
           </PrivateRoutes>
         ),
+      },
+      {
+        path: "/wishlist",
+        element: <Wishlist />,
       },
     ],
   },

@@ -1,30 +1,44 @@
+import { motion } from "framer-motion";
+import { FaArrowRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { fadeUp } from "../../../Components/Motion";
 
-const Category = ({ Scategory }) => {
-  const { _id, image, category } = Scategory;
+const icons = {
+  Fiction: "🎭",
+  "Mystery & Thriller": "🕵️",
+  "Non-Fiction": "🧠",
+  "Science Fiction & Fantasy": "🚀",
+};
+
+const Category = ({ category }) => {
+  const { _id, image, category: name } = category;
+
   return (
-    <div>
-      <div className=" relative rounded-lg shadow-xl">
-        <figure>
-          <img
-            src={image}
-            alt=""
-            className="rounded-t-lg h-52 w-full object-cover"
-          />
-        </figure>
-        <div className="card-body items-center text-center">
-          <h2 className="card-title">{category}</h2>
+    <motion.div variants={fadeUp} whileHover={{ y: -8 }} className="group h-full">
+      <Link
+        to={`/category/${_id}`}
+        className="relative block h-72 overflow-hidden rounded-3xl shadow-soft transition-shadow duration-300 hover:shadow-lift"
+      >
+        <img
+          src={image}
+          alt={name}
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-brand-950/30 to-transparent" />
+
+        <span className="absolute left-5 top-5 grid size-12 place-items-center rounded-2xl bg-white/20 text-2xl backdrop-blur transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110">
+          {icons[name] || "📖"}
+        </span>
+
+        <div className="absolute inset-x-5 bottom-5">
+          <h3 className="font-display text-xl font-bold text-white">{name}</h3>
+          <p className="mt-1 flex items-center gap-2 text-sm font-semibold text-sage-300 opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100">
+            Explore collection <FaArrowRight />
+          </p>
         </div>
-        <div
-          style={{ background: "rgba(11, 11, 11, 0.50)" }}
-          className="rounded-lg absolute top-0 left-0 flex items-center justify-center w-full h-full opacity-0 hover:opacity-90"
-        >
-          <Link to={`/category/${_id}`}>
-            <button className="btn btn-primary rounded">See Collections</button>
-          </Link>
-        </div>
-      </div>
-    </div>
+      </Link>
+    </motion.div>
   );
 };
 

@@ -1,27 +1,49 @@
-# BookBeacon - Libray Management Website
+# 📚 BookBeacon — Library Management Website
 
-Welcome to Book Beacon. This website is built using React.js, Tailwind CSS, Daisy UI, and Firebase authentication, providing a comprehensive set of features to enhance your experience.
+**Live site:** https://book-beacon.web.app
+**Backend repo:** https://github.com/AvishekChy77/Book-Beacon-Server
 
-Site Link: https://book-beacon.firebaseapp.com // https://book-beacon.web.app
+BookBeacon is a modern, animated library web app — browse a growing collection across every genre, borrow in one click and return on your schedule.
 
-Key Features
+## ✨ Features
 
-# Diverse Book Collection:
+- **Animated UI** — Framer Motion powers the hero slideshow, scroll-reveal sections, staggered grids, count-up stats, page transitions and micro-interactions throughout
+- **Smart browsing** — instant search (title/author), category filter, sorting (rating, name, copies), availability toggle and grid/list view switching
+- **Borrow & return** — pick a return date, track everything on the Borrowed Books page with days-left / overdue badges
+- **Wishlist** — heart any book to save it locally; a live badge in the navbar keeps count
+- **Read & download** — book summaries with a generated PDF download (code-split so the PDF engine only loads when needed)
+- **Librarian tools** — add and update books with a live cover-image preview
+- **Secure auth** — Firebase email/password + Google sign-in, JWT cookies for protected API calls
+- **Dark / light theme** — custom DaisyUI themes built around the BookBeacon teal & sage palette
+- **Request a book** — can't find a title? Send a request straight to the librarians
 
-BookBeacon offers a wide range of books across different categories, providing users with access to an extensive library of literary works, from fiction to non-fiction, and more.
+## 🛠 Tech Stack
 
-# User-Friendly Library Management:
+| Layer | Tech |
+|---|---|
+| Framework | React 18 + Vite |
+| Styling | Tailwind CSS + DaisyUI (custom themes) |
+| Animation | Framer Motion, Swiper |
+| Data | TanStack Query + Axios |
+| Auth | Firebase Authentication |
+| Extras | React Router, SweetAlert2, React-Toastify, @react-pdf/renderer |
 
-Users can easily manage their reading journey by borrowing, reading, and returning books. With user-friendly features, keeping track of your borrowed books has never been easier.
+## 🚀 Getting started
 
-# Personalized Recommendations:
+```bash
+npm install
 
-BookBeacon enhances the reading experience by offering personalized book recommendations, helping users discover new titles that align with their interests and preferences.
+# copy the env template and fill in your Firebase web config
+cp .env.example .env
 
-# Dark/Light Theme Toggle:
+npm run dev
+```
 
-BookBeacon provides a visually pleasing experience with a customizable dark/light theme toggle. Users can switch between themes to read comfortably in different lighting conditions.
+The app talks to the Express/MongoDB API in [Book-Beacon-Server](https://github.com/AvishekChy77/Book-Beacon-Server).
 
-# Secure Authentication:
+## 📦 Build & deploy
 
-The platform prioritizes security with Firebase for user authentication and JWT for token generation. This ensures a safe and trusted environment for users to enjoy their books with peace of mind.
+```bash
+npm run build        # outputs to dist/
+firebase deploy      # hosting config in firebase.json
+```

@@ -1,16 +1,25 @@
+import { PageTransition } from "../../Components/Motion";
+import Hero from "./Hero";
+import Stats from "./Stats";
 import Categories from "./Category/Categories";
-import Introduction from "./Introduction";
+import FeaturedBooks from "./FeaturedBooks";
+import WhyUs from "./WhyUs";
+import HowItWorks from "./HowItWorks";
 import Reviews from "./Review/Reviews";
-import SimpleSlider from "./Slider/Slider";
+import Newsletter from "./Newsletter";
 
 const Home = () => {
   return (
-    <div className="my-10">
-      <SimpleSlider></SimpleSlider>
-      <Introduction></Introduction>
-      <Categories></Categories>
-      <Reviews></Reviews>
-    </div>
+    <PageTransition>
+      <Hero />
+      <Stats />
+      <Categories />
+      <FeaturedBooks />
+      <WhyUs />
+      <HowItWorks />
+      <Reviews />
+      <Newsletter />
+    </PageTransition>
   );
 };
 

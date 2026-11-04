@@ -1,45 +1,41 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { GridSkeleton } from "../../../Components/Loading";
+import SectionHeading from "../../../Components/SectionHeading";
+import { Section } from "../../../Components/Motion";
 import Category from "./Category";
 
 const Categories = () => {
-  const {
-    isLoading,
-    isFetching,
-    data: Categories,
-  } = useQuery({
+  const axiosPublic = useAxiosPublic();
+  const { isLoading, data: categories } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const res = await axios.get(
-        "https://book-beacon-server.vercel.app/category"
-      );
+      const res = await axiosPublic.get("/category");
       return res.data;
     },
   });
-  if (isLoading) {
-    return (
-      <div className=" max-w-4xl mx-auto p-5 mt-5 text-center">
-        <span className="loading loading-spinner loading-lg"></span>
-      </div>
-    );
-  }
 
   return (
-    <div className="my-10 max-w-4xl p-4 mx-auto ">
-      <h2 className=" text-3xl font-extrabold text-center lg:text-5xl">
-        Categories
-      </h2>
-      {isFetching && (
-        <div className=" max-w-4xl mx-auto p-5 mt-5 text-center">
-          <span className="loading loading-spinner loading-lg"></span>
+    <Section className="container mx-auto px-4 py-20">
+      <SectionHeading
+        eyebrow="Browse by genre"
+        title={
+          <>
+            Find Your <span className="text-gradient">Reading Lane</span>
+          </>
+        }
+        subtitle="From gripping thrillers to timeless classics — pick a shelf and dive in."
+      />
+      {isLoading ? (
+        <GridSkeleton count={4} />
+      ) : (
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {categories?.map((category, i) => (
+            <Category key={category._id} category={category} index={i} />
+          ))}
         </div>
       )}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-10">
-        {Categories?.map((Scategory) => (
-          <Category key={Scategory._id} Scategory={Scategory}></Category>
-        ))}
-      </div>
-    </div>
+    </Section>
   );
 };
 

@@ -1,151 +1,190 @@
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { FaBookMedical, FaImage } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import { PageTransition } from "../../Components/Motion";
+import PageBanner from "../../Components/PageBanner";
+
+const CATEGORIES = [
+  "Fiction",
+  "Mystery & Thriller",
+  "Non-Fiction",
+  "Science Fiction & Fantasy",
+];
 
 const AddBook = () => {
+  const [preview, setPreview] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
   const handleAdd = (e) => {
     e.preventDefault();
     const form = e.target;
-    const name = form.name.value;
-    const authorName = form.authorName.value;
-    const category = form.category.value;
-    const image = form.image.value;
-    const rating = form.rating.value;
-    const quantity = form.quantity.value;
-    const summary = form.summary.value;
     const newBook = {
-      name,
-      authorName,
-      category,
-      quantity,
-      image,
-      rating,
-      summary,
+      name: form.name.value,
+      authorName: form.authorName.value,
+      category: form.category.value,
+      quantity: Number(form.quantity.value),
+      image: form.image.value,
+      rating: Number(form.rating.value),
+      summary: form.summary.value,
     };
-    console.log(newBook);
 
-    // sending data to the server
+    setSubmitting(true);
     fetch("https://book-beacon-server.vercel.app/books", {
       method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
+      headers: { "content-type": "application/json" },
       body: JSON.stringify(newBook),
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.insertedId) {
           Swal.fire({
-            title: "success!",
-            text: "Book added successfully",
+            title: "On the shelf!",
+            text: `"${newBook.name}" was added to the library.`,
             icon: "success",
-            confirmButtonText: "Cool",
+            confirmButtonText: "Nice",
+            confirmButtonColor: "#016A70",
           });
+          form.reset();
+          setPreview("");
         }
-      });
+      })
+      .finally(() => setSubmitting(false));
   };
+
   return (
-    <div>
-      <h2 className=" text-3xl mt-10 text-center mb-5 font-semibold">
-        Add New Book
-      </h2>
-      <div className=" max-w-2xl mx-auto p-5 flex justify-center mb-10 bg-emerald-50 rounded-md shadow-xl">
-        <form onSubmit={handleAdd}>
-          <div className="flex flex-col md:flex-row gap-5 my-3 items-center">
-            <div className="form-control md:w-1/2">
-              <label className="label">
-                <span className="text-black label-text">Book Name</span>
-              </label>
+    <PageTransition className="container mx-auto px-4 pb-20">
+      <PageBanner
+        eyebrow="Librarian tools"
+        title="Add a New Book"
+        subtitle="Stock the shelves — add a title with its cover, rating and summary."
+        crumbs={["Add Book"]}
+      />
+
+      <div className="mx-auto mt-10 grid max-w-5xl gap-8 lg:grid-cols-[1fr_320px]">
+        {/* form */}
+        <motion.form
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          onSubmit={handleAdd}
+          className="surface p-8"
+        >
+          <div className="grid gap-5 md:grid-cols-2">
+            <div>
+              <label className="label-modern">Book name</label>
               <input
                 type="text"
-                placeholder="Name"
                 name="name"
-                className="input input-bordered"
+                placeholder="e.g. The Silent Patient"
+                className="input-modern"
                 required
               />
             </div>
-            <div className="form-control md:w-1/2">
-              <label className="label">
-                <span className="text-black label-text">Author Name</span>
-              </label>
+            <div>
+              <label className="label-modern">Author</label>
               <input
                 type="text"
-                placeholder="Author's Name"
                 name="authorName"
-                className="input input-bordered"
+                placeholder="e.g. Alex Michaelides"
+                className="input-modern"
                 required
               />
             </div>
-          </div>
-          <div className="flex flex-col md:flex-row gap-5 my-3 items-center">
-            <div className="form-control md:w-1/2">
-              <label className="label">
-                <span className="text-black label-text">Category</span>
-              </label>
-              <select className="input" id="category" name="category">
-                <option value="Fiction">Fiction</option>
-                <option value="Mystery & Thriller">Mystery & Thriller</option>
-                <option value="Non-Fiction">Non-Fiction</option>
-                <option value="Science Fiction & Fantasy">
-                  Science Fiction & Fantasy
-                </option>
+            <div>
+              <label className="label-modern">Category</label>
+              <select
+                name="category"
+                className="select select-bordered w-full rounded-xl bg-base-200/60 focus:border-brand-500 focus:outline-none"
+              >
+                {CATEGORIES.map((c) => (
+                  <option key={c}>{c}</option>
+                ))}
               </select>
             </div>
-            <div className="form-control md:w-1/2">
-              <label className="label">
-                <span className="text-black label-text">Quantity</span>
-              </label>
+            <div>
+              <label className="label-modern">Quantity</label>
               <input
-                type="text"
-                placeholder="quantity"
+                type="number"
+                min="0"
                 name="quantity"
-                className="input input-bordered"
+                placeholder="How many copies?"
+                className="input-modern"
                 required
               />
             </div>
-          </div>
-          <div className="flex flex-col md:flex-row gap-5 my-3 items-center">
-            <div className="form-control md:w-1/2">
-              <label className="label">
-                <span className="text-black label-text">Image</span>
-              </label>
+            <div>
+              <label className="label-modern">Cover image URL</label>
               <input
-                type="text"
-                placeholder="Image"
+                type="url"
                 name="image"
-                className="input input-bordered"
+                placeholder="https://…"
+                className="input-modern"
+                onChange={(e) => setPreview(e.target.value)}
                 required
               />
             </div>
-            <div className="form-control md:w-1/2">
-              <label className="label">
-                <span className="text-black label-text">rating</span>
-              </label>
+            <div>
+              <label className="label-modern">Rating (1–5)</label>
               <input
-                type="text"
-                placeholder="rating"
+                type="number"
                 name="rating"
-                className="input input-bordered"
+                min="1"
+                max="5"
+                step="0.1"
+                placeholder="e.g. 4.5"
+                className="input-modern"
                 required
               />
             </div>
           </div>
-          <div className="form-control">
+          <div className="mt-5">
+            <label className="label-modern">Summary</label>
             <textarea
               rows="5"
-              cols="33"
-              defaultValue="Summary"
               name="summary"
-              className="p-2 rounded-lg"
-            ></textarea>
+              placeholder="A short, spoiler-free description of the book…"
+              className="textarea textarea-bordered w-full rounded-xl bg-base-200/60 focus:border-brand-500 focus:outline-none"
+            />
           </div>
-          <div className=" text-center">
-            <button className="my-5 btn w-full bg-white text-black btn-outline">
-              Add Book
-            </button>
+          <motion.button
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.98 }}
+            disabled={submitting}
+            className="btn-brand mt-6 w-full rounded-xl"
+          >
+            <FaBookMedical />
+            {submitting ? "Adding…" : "Add Book to Library"}
+          </motion.button>
+        </motion.form>
+
+        {/* live preview */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="surface h-fit p-6 text-center lg:sticky lg:top-28"
+        >
+          <h3 className="font-display font-bold">Cover preview</h3>
+          <div className="mt-4 grid aspect-[3/4] place-items-center overflow-hidden rounded-2xl bg-base-200">
+            {preview ? (
+              <img
+                src={preview}
+                alt="Cover preview"
+                className="h-full w-full object-cover"
+                onError={(e) => (e.target.style.display = "none")}
+                onLoad={(e) => (e.target.style.display = "block")}
+              />
+            ) : (
+              <div className="text-base-content/40">
+                <FaImage className="mx-auto text-4xl" />
+                <p className="mt-2 text-xs">Paste an image URL to preview</p>
+              </div>
+            )}
           </div>
-        </form>
+        </motion.div>
       </div>
-    </div>
+    </PageTransition>
   );
 };
 

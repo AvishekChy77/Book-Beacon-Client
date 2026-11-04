@@ -1,53 +1,133 @@
+import {
+  FaEnvelope,
+  FaFacebookF,
+  FaGithub,
+  FaLocationDot,
+  FaXTwitter,
+  FaYoutube,
+} from "react-icons/fa6";
+import { Link } from "react-router-dom";
+
+const explore = [
+  { to: "/allBooks", label: "All Books" },
+  { to: "/AddBook", label: "Add a Book" },
+  { to: "/borrowedBooks", label: "Borrowed Books" },
+  { to: "/wishlist", label: "My Wishlist" },
+];
+
+const support = [
+  { to: "/request", label: "Request a Book" },
+  { to: "/login", label: "Log in" },
+  { to: "/register", label: "Create account" },
+];
+
+const socials = [
+  { icon: <FaFacebookF />, label: "Facebook" },
+  { icon: <FaXTwitter />, label: "Twitter / X" },
+  { icon: <FaYoutube />, label: "YouTube" },
+  { icon: <FaGithub />, label: "GitHub" },
+];
+
 const Footer = () => {
   return (
-    <footer className="footer p-10 bg-neutral text-neutral-content">
-      <aside>
-        <p>
-          <h2 className=" text-xl font-YSerif font-bold">
-            <span className=" text-[#016A70]">Book</span>
-            <span className=" text-[#A2C579]">Beacon</span>
-          </h2>
-          Guiding Your Literary Journey
-        </p>
-      </aside>
-      <nav>
-        <header className="footer-title">Social</header>
-        <div className="grid grid-flow-col gap-4">
-          <a>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              className="fill-current"
-            >
-              <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path>
-            </svg>
-          </a>
-          <a>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              className="fill-current"
-            >
-              <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
-            </svg>
-          </a>
-          <a>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              className="fill-current"
-            >
-              <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
-            </svg>
-          </a>
+    <footer className="relative mt-24 overflow-hidden bg-brand-950 text-white">
+      <div className="bg-grid absolute inset-0 opacity-20" />
+      <div className="absolute -left-24 top-0 size-72 rounded-full bg-brand-500/10 blur-3xl" />
+      <div className="absolute -right-24 bottom-0 size-72 rounded-full bg-sage-400/10 blur-3xl" />
+
+      <div className="container relative mx-auto px-4 py-16">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+          {/* brand */}
+          <div>
+            <div className="flex items-center gap-2">
+              <img
+                className="w-8"
+                src="https://i.ibb.co/64HpLpj/bb-logo-png.png"
+                alt="BookBeacon logo"
+              />
+              <h2 className="font-display text-2xl font-bold">
+                <span className="text-brand-300">Book</span>
+                <span className="text-sage-400">Beacon</span>
+              </h2>
+            </div>
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
+              Your guiding light in the world of books. Browse, borrow and read
+              from a growing collection across every genre — free for every
+              reader.
+            </p>
+            <div className="mt-6 flex gap-3">
+              {socials.map(({ icon, label }) => (
+                <a
+                  key={label}
+                  href="#"
+                  aria-label={label}
+                  className="grid size-10 place-items-center rounded-xl bg-white/5 text-white/70 transition-all duration-300 hover:-translate-y-1 hover:bg-brand-500 hover:text-white"
+                >
+                  {icon}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* explore */}
+          <div>
+            <h4 className="font-display text-lg font-bold text-sage-300">Explore</h4>
+            <ul className="mt-5 space-y-3 text-sm">
+              {explore.map(({ to, label }) => (
+                <li key={to}>
+                  <Link
+                    to={to}
+                    className="text-white/60 transition-all duration-300 hover:pl-1.5 hover:text-brand-300"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* support */}
+          <div>
+            <h4 className="font-display text-lg font-bold text-sage-300">Account</h4>
+            <ul className="mt-5 space-y-3 text-sm">
+              {support.map(({ to, label }) => (
+                <li key={to}>
+                  <Link
+                    to={to}
+                    className="text-white/60 transition-all duration-300 hover:pl-1.5 hover:text-brand-300"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* contact */}
+          <div>
+            <h4 className="font-display text-lg font-bold text-sage-300">Contact</h4>
+            <ul className="mt-5 space-y-4 text-sm text-white/60">
+              <li className="flex items-start gap-3">
+                <FaLocationDot className="mt-0.5 shrink-0 text-brand-300" />
+                Chattogram, Bangladesh
+              </li>
+              <li className="flex items-start gap-3">
+                <FaEnvelope className="mt-0.5 shrink-0 text-brand-300" />
+                hello@bookbeacon.app
+              </li>
+            </ul>
+            <p className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4 text-xs leading-relaxed text-white/50">
+              Open every day — your library never closes. Borrow up to 3 books
+              at a time and return them on your schedule.
+            </p>
+          </div>
         </div>
-      </nav>
+
+        <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-white/40 sm:flex-row">
+          <p>© {new Date().getFullYear()} BookBeacon — Guiding Your Literary Journey</p>
+          <p>Built with React, Express & MongoDB</p>
+        </div>
+      </div>
     </footer>
   );
 };

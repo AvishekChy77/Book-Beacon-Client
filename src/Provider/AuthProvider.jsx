@@ -52,17 +52,13 @@ const AuthProvider = ({ children }) => {
           .post("https://book-beacon-server.vercel.app/jwt", loggedUser, {
             withCredentials: true,
           })
-          .then((res) =>
-            console.log("token response from authProvider", res.data)
-          );
+          .catch(() => {});
       } else {
         axios
           .post("https://book-beacon-server.vercel.app/logout", loggedUser, {
             withCredentials: true,
           })
-          .then((res) =>
-            console.log("token response from logout AP", res.data)
-          );
+          .catch(() => {});
       }
     });
 

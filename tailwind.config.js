@@ -1,21 +1,137 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: "class",
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       fontFamily: {
         Poppins: "'Poppins', sans-serif",
-        YSerif:"'Young Serif', serif"
-      }
+        YSerif: "'Fraunces', 'Young Serif', serif",
+        display: "'Fraunces', 'Young Serif', serif",
+      },
+      colors: {
+        brand: {
+          50: "#ecfdfa",
+          100: "#d0f7f2",
+          200: "#a3ede6",
+          300: "#6cdcd5",
+          400: "#35c2bd",
+          500: "#17a5a3",
+          600: "#0e8486",
+          700: "#016A70",
+          800: "#0f5257",
+          900: "#114449",
+          950: "#03272c",
+        },
+        sage: {
+          50: "#f6faee",
+          100: "#eaf3d9",
+          200: "#d6e8b8",
+          300: "#bbd88e",
+          400: "#A2C579",
+          500: "#83ab4f",
+          600: "#65883a",
+          700: "#4e6930",
+          800: "#40542b",
+          900: "#374828",
+        },
+        gold: {
+          300: "#f3d48b",
+          400: "#ecc05e",
+          500: "#e4a93b",
+          600: "#cf8a2a",
+        },
+      },
+      boxShadow: {
+        soft: "0 10px 40px -12px rgba(1, 106, 112, 0.25)",
+        lift: "0 20px 50px -16px rgba(3, 39, 44, 0.35)",
+        glow: "0 0 40px -8px rgba(53, 194, 189, 0.5)",
+      },
+      keyframes: {
+        float: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-14px)" },
+        },
+        "float-slow": {
+          "0%, 100%": { transform: "translateY(0px) rotate(-3deg)" },
+          "50%": { transform: "translateY(-20px) rotate(3deg)" },
+        },
+        blob: {
+          "0%, 100%": { transform: "translate(0px, 0px) scale(1)" },
+          "33%": { transform: "translate(30px, -40px) scale(1.1)" },
+          "66%": { transform: "translate(-25px, 25px) scale(0.92)" },
+        },
+        shine: {
+          "0%": { backgroundPosition: "200% center" },
+          "100%": { backgroundPosition: "-200% center" },
+        },
+        "spin-slow": {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(360deg)" },
+        },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
+      },
+      animation: {
+        float: "float 5s ease-in-out infinite",
+        "float-slow": "float-slow 7s ease-in-out infinite",
+        blob: "blob 12s ease-in-out infinite",
+        shine: "shine 6s linear infinite",
+        "spin-slow": "spin-slow 14s linear infinite",
+        marquee: "marquee 30s linear infinite",
+      },
     },
   },
   plugins: [require("daisyui")],
-  // daisyui:{
-  //   themes: ['lofi']
-  // }
-}
-
+  daisyui: {
+    darkTheme: "dark",
+    themes: [
+      {
+        light: {
+          primary: "#016A70",
+          "primary-content": "#eafffb",
+          secondary: "#83ab4f",
+          "secondary-content": "#0f2409",
+          accent: "#e4a93b",
+          "accent-content": "#2c1d02",
+          neutral: "#0f2e31",
+          "neutral-content": "#d7f4f0",
+          "base-100": "#fbfaf7",
+          "base-200": "#f1efe8",
+          "base-300": "#e3e0d5",
+          "base-content": "#1d2a2b",
+          info: "#0ea5e9",
+          success: "#16a34a",
+          warning: "#f59e0b",
+          error: "#e11d48",
+          "--rounded-btn": "0.9rem",
+          "--rounded-box": "1.2rem",
+        },
+      },
+      {
+        dark: {
+          primary: "#35c2bd",
+          "primary-content": "#03272c",
+          secondary: "#A2C579",
+          "secondary-content": "#15200a",
+          accent: "#ecc05e",
+          "accent-content": "#2c1d02",
+          neutral: "#101d1f",
+          "neutral-content": "#c5e8e4",
+          "base-100": "#0c1617",
+          "base-200": "#111f21",
+          "base-300": "#1a2c2e",
+          "base-content": "#dceeec",
+          info: "#38bdf8",
+          success: "#4ade80",
+          warning: "#fbbf24",
+          error: "#fb7185",
+          "--rounded-btn": "0.9rem",
+          "--rounded-box": "1.2rem",
+        },
+      },
+    ],
+  },
+};

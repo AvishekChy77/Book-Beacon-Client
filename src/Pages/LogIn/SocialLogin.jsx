@@ -1,36 +1,30 @@
 import { useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const SocialLogin = () => {
   const { googleLogIn } = useContext(AuthContext);
   const location = useLocation();
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSocialSignIn = (social) => {
     social()
-      .then((res) => {
-        console.log(res.user);
-        Navigate(location?.state ? location.state : "/");
-
-        toast("Successfully logged in!");
+      .then(() => {
+        navigate(location?.state ? location.state : "/");
+        toast.success("Successfully logged in!");
       })
-      .catch((error) => console.log(error));
+      .catch(() => toast.error("Google sign-in was cancelled"));
   };
+
   return (
-    <div className=" w-full">
-      <div
-        onClick={() => handleSocialSignIn(googleLogIn)}
-        className=" cursor-pointer flex rounded-md gap-5 justify-center items-center hover:bg-slate-200 text-lg "
-      >
-        <span className="py-2  font-semibold">Continue with</span>
-        <FcGoogle></FcGoogle>
-      </div>
-      <ToastContainer />
-    </div>
+    <button
+      onClick={() => handleSocialSignIn(googleLogIn)}
+      className="btn w-full rounded-xl border-base-300 bg-base-200/60 font-semibold hover:border-brand-500 hover:bg-base-200"
+    >
+      <FcGoogle className="text-xl" /> Continue with Google
+    </button>
   );
 };
 

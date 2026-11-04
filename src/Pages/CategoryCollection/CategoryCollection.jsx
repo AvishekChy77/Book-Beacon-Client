@@ -1,47 +1,56 @@
+import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
+import BookCard from "../../Components/BookCard";
+import EmptyState from "../../Components/EmptyState";
+import { GridSkeleton } from "../../Components/Loading";
+import { PageTransition, stagger } from "../../Components/Motion";
+import PageBanner from "../../Components/PageBanner";
 import useCategory from "../../Hooks/useCategory";
-import Book from "./Book";
 
 const CategoryCollection = () => {
   const { id } = useParams();
-  const { data, isLoading, isFetching } = useCategory();
-  console.log(data);
+  const { data, isLoading } = useCategory();
+
   const categories = data?.category;
   const sCategory = categories?.find((c) => c._id === id);
-  const books = data?.books;
-  console.log(sCategory, books, categories);
+  const books = data?.books?.filter((b) => b.category === sCategory?.category);
 
-  const sCategoryBooks = books?.filter(
-    (b) => b.category === sCategory.category
-  );
-  console.log(sCategory, books, sCategoryBooks);
-
-  if (isLoading) {
-    return (
-      <div className=" max-w-4xl mx-auto p-5 mt-5 text-center">
-        <span className="loading loading-spinner loading-lg"></span>
-      </div>
-    );
-  }
   return (
-    <div className="my-10 max-w-4xl p-4 mx-auto ">
-      <h2 className=" text-3xl font-extrabold text-center lg:text-4xl">
-        {sCategory.category}
-      </h2>
-      <p className="text-xl text-center my-2">
-        Explore our vast collection of {sCategory.category} books
-      </p>
-      {isFetching && (
-        <div className=" max-w-4xl mx-auto p-5 mt-5 text-center">
-          <span className="loading loading-spinner loading-lg"></span>
+    <PageTransition className="container mx-auto px-4 pb-20">
+      <PageBanner
+        eyebrow="Category"
+        title={sCategory?.category || "Collection"}
+        subtitle={`Explore our hand-picked collection of ${
+          sCategory?.category || ""
+        } books.`}
+        crumbs={["Categories", sCategory?.category || "…"]}
+      />
+
+      {isLoading ? (
+        <div className="mt-10">
+          <GridSkeleton count={8} />
         </div>
+      ) : !books?.length ? (
+        <EmptyState
+          icon="📚"
+          title="Nothing on this shelf yet"
+          message="We're still stocking this category — check back soon or browse all books."
+          actionText="Browse all books"
+          actionTo="/allBooks"
+        />
+      ) : (
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          animate="show"
+          className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+        >
+          {books.map((book) => (
+            <BookCard key={book._id} book={book} />
+          ))}
+        </motion.div>
       )}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-10">
-        {sCategoryBooks?.map((book) => (
-          <Book key={book._id} book={book}></Book>
-        ))}
-      </div>
-    </div>
+    </PageTransition>
   );
 };
 

@@ -6,7 +6,6 @@ import {
   Text,
   View,
 } from "@react-pdf/renderer";
-import React from "react";
 
 // Create styles
 const styles = StyleSheet.create({

@@ -1,103 +1,183 @@
-import { BsSun } from "react-icons/bs";
-import { MdDarkMode } from "react-icons/md";
-import { NavLink } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { FaBars, FaHeart, FaMoon, FaSun, FaXmark } from "react-icons/fa6";
+import { FiLogOut } from "react-icons/fi";
+import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import { useTheme } from "../../../Hooks/useTheme";
-import "./Navbar.css";
+import useWishlist from "../../../Hooks/useWishlist";
 import Navs from "./Navs";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
-  console.log(user);
   const { changeTheme, mode } = useTheme();
+  const { count } = useWishlist();
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const handleSignOut = () => {
-    logOut()
-      .then()
-      .catch((error) => console.log(error.message));
+    logOut().catch(() => {});
   };
 
   return (
-    <div className="navbar pt-1">
-      <div className="w-2/3 md:w-1/2 navbar-start">
-        <div className="dropdown text-black">
-          <label tabIndex={0} className="btn px-2 btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 md:h-5 w-4 md:w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </label>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 Navbar rounded-box w-52"
-          >
-            <Navs />
-          </ul>
-        </div>
-        <div className="font-YSerif flex items-center text-xl md:text-2xl lg:text-3xl font-bold">
-          <img
-            className="  w-6 md:w-7 lg:w-8 mr-2"
+    <motion.header
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className={`sticky top-0 z-40 transition-all duration-300 ${
+        scrolled
+          ? "glass shadow-soft"
+          : "border-b border-transparent bg-transparent"
+      }`}
+    >
+      <div className="container mx-auto flex h-16 items-center justify-between px-3 md:h-[72px]">
+        {/* brand */}
+        <Link to="/" className="flex items-center gap-2">
+          <motion.img
+            whileHover={{ rotate: -10, scale: 1.08 }}
+            className="w-7 md:w-8"
             src="https://i.ibb.co/64HpLpj/bb-logo-png.png"
-            alt=""
+            alt="BookBeacon logo"
           />
-          <p>
-            <span className=" text-[#016A70]">Book</span>
-            <span className=" text-[#A2C579]">Beacon</span>
+          <p className="font-display text-xl font-bold md:text-2xl">
+            <span className="text-brand-700 dark:text-brand-300">Book</span>
+            <span className="text-sage-500 dark:text-sage-400">Beacon</span>
           </p>
-        </div>
-      </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal text-base md:text-lg font-medium flex gap-3 md:gap-7 Navbar">
+        </Link>
+
+        {/* desktop nav */}
+        <nav className="hidden items-center gap-1 lg:flex">
           <Navs />
-        </ul>
-      </div>
-      <div className="w-1/3 md:w-1/2 navbar-end">
-        {user?.email ? (
-          <div className="dropdown dropdown-end mr-5">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img src={user.photoURL} alt="" />
-              </div>
-            </label>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <button className="btn btn-sm btn-ghost">
-                  {user.displayName}
-                </button>
-              </li>
-              <li>
+        </nav>
+
+        {/* right side */}
+        <div className="flex items-center gap-2 md:gap-3">
+          <Link
+            to="/wishlist"
+            aria-label="Wishlist"
+            className="relative grid size-10 place-items-center rounded-xl text-rose-500 transition hover:bg-rose-500/10"
+          >
+            <FaHeart className="text-lg" />
+            {count > 0 && (
+              <motion.span
+                key={count}
+                initial={{ scale: 0.4 }}
+                animate={{ scale: 1 }}
+                className="absolute -right-0.5 -top-0.5 grid size-5 place-items-center rounded-full bg-rose-500 text-[10px] font-bold text-white"
+              >
+                {count}
+              </motion.span>
+            )}
+          </Link>
+
+          <button
+            onClick={changeTheme}
+            aria-label="Toggle theme"
+            className="grid size-10 place-items-center rounded-xl text-base-content/70 transition hover:bg-brand-700/10 hover:text-brand-700 dark:hover:text-brand-300"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.span
+                key={mode}
+                initial={{ rotate: -120, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 120, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="text-lg"
+              >
+                {mode === "dark" ? <FaSun /> : <FaMoon />}
+              </motion.span>
+            </AnimatePresence>
+          </button>
+
+          {user?.email ? (
+            <div className="dropdown dropdown-end">
+              <label
+                tabIndex={0}
+                className="btn btn-circle btn-ghost avatar ring-2 ring-brand-500/40 ring-offset-2 ring-offset-base-100 transition hover:ring-brand-500"
+              >
+                <div className="w-9 rounded-full">
+                  <img
+                    src={user.photoURL || "https://i.ibb.co/64HpLpj/bb-logo-png.png"}
+                    alt={user.displayName || "profile"}
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+              </label>
+              <div
+                tabIndex={0}
+                className="dropdown-content z-50 mt-3 w-60 rounded-2xl border border-base-300/60 bg-base-100 p-4 shadow-lift"
+              >
+                <p className="font-bold">{user.displayName || "Reader"}</p>
+                <p className="truncate text-xs text-base-content/60">{user.email}</p>
+                <div className="my-3 h-px bg-base-300" />
+                <Link
+                  to="/borrowedBooks"
+                  className="block rounded-lg px-2 py-1.5 text-sm font-medium transition hover:bg-brand-700/10"
+                >
+                  My borrowed books
+                </Link>
+                <Link
+                  to="/wishlist"
+                  className="block rounded-lg px-2 py-1.5 text-sm font-medium transition hover:bg-brand-700/10"
+                >
+                  My wishlist
+                </Link>
                 <button
                   onClick={handleSignOut}
-                  className="btn btn-sm btn-ghost"
+                  className="mt-1 flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-semibold text-rose-500 transition hover:bg-rose-500/10"
                 >
-                  Logout
+                  <FiLogOut /> Log out
                 </button>
-              </li>
-            </ul>
-          </div>
-        ) : (
-          <NavLink to="/login">
-            <button className="btn btn-sm btn-outline mr-5">LogIn</button>
-          </NavLink>
-        )}
-        <button onClick={changeTheme}>
-          {mode === "dark" ? <MdDarkMode></MdDarkMode> : <BsSun></BsSun>}
-        </button>
+              </div>
+            </div>
+          ) : (
+            <NavLink to="/login" className="btn-brand btn-sm hidden rounded-xl px-5 sm:inline-flex">
+              Log in
+            </NavLink>
+          )}
+
+          {/* mobile hamburger */}
+          <button
+            onClick={() => setOpen(!open)}
+            aria-label="Menu"
+            className="grid size-10 place-items-center rounded-xl text-xl transition hover:bg-brand-700/10 lg:hidden"
+          >
+            {open ? <FaXmark /> : <FaBars />}
+          </button>
+        </div>
       </div>
-    </div>
+
+      {/* mobile menu */}
+      <AnimatePresence>
+        {open && (
+          <motion.nav
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="glass overflow-hidden border-t border-base-300/60 lg:hidden"
+          >
+            <div
+              className="container mx-auto flex flex-col gap-1 px-4 py-4"
+              onClick={() => setOpen(false)}
+            >
+              <Navs mobile />
+              {!user?.email && (
+                <NavLink to="/login" className="btn-brand btn-sm mt-2 w-full rounded-xl">
+                  Log in
+                </NavLink>
+              )}
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 };
 
