@@ -3,21 +3,25 @@ import { useEffect, useState } from "react";
 import { FaArrowRight, FaBookOpen, FaStar } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
+// small, CDN-optimised images (~100KB each instead of 1-2MB originals)
+const IMG = (id) =>
+  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=900&q=60`;
+
 const slides = [
   {
-    image: "https://i.ibb.co/1ZSDkQT/slide-2.jpg",
+    image: IMG("photo-1507842217343-583bb7270b66"),
     caption: "Shelves full of possibility",
   },
   {
-    image: "https://i.ibb.co/TwD2FCB/slide-4.jpg",
+    image: IMG("photo-1512820790803-83ca734da794"),
     caption: "Find your next favourite",
   },
   {
-    image: "https://i.ibb.co/wBxfhDV/slide-1.jpg",
+    image: IMG("photo-1521587760476-6c12a4b040da"),
     caption: "A quiet corner to read",
   },
   {
-    image: "https://i.ibb.co/ryG6GzF/slide-3.jpg",
+    image: IMG("photo-1519682337058-a94d519337bc"),
     caption: "Stories for every mood",
   },
 ];
@@ -31,6 +35,11 @@ const Hero = () => {
   useEffect(() => {
     const s = setInterval(() => setSlide((p) => (p + 1) % slides.length), 4500);
     const w = setInterval(() => setWord((p) => (p + 1) % words.length), 2600);
+    // warm the browser cache so crossfades never show an empty frame
+    slides.forEach(({ image }) => {
+      const img = new Image();
+      img.src = image;
+    });
     return () => {
       clearInterval(s);
       clearInterval(w);

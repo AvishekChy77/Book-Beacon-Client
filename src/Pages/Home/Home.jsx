@@ -5,6 +5,7 @@ import Categories from "./Category/Categories";
 import FeaturedBooks from "./FeaturedBooks";
 import WhyUs from "./WhyUs";
 import HowItWorks from "./HowItWorks";
+import Quotes from "./Quotes";
 import Reviews from "./Review/Reviews";
 import Newsletter from "./Newsletter";
 
@@ -17,6 +18,7 @@ const Home = () => {
       <FeaturedBooks />
       <WhyUs />
       <HowItWorks />
+      <Quotes />
       <Reviews />
       <Newsletter />
     </PageTransition>

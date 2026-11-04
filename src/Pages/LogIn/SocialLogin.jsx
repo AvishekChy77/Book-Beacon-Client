@@ -15,7 +15,19 @@ const SocialLogin = () => {
         navigate(location?.state ? location.state : "/");
         toast.success("Successfully logged in!");
       })
-      .catch(() => toast.error("Google sign-in was cancelled"));
+      .catch((error) => {
+        const messages = {
+          "auth/popup-closed-by-user": "Sign-in popup was closed before finishing.",
+          "auth/cancelled-popup-request": "Sign-in popup was closed before finishing.",
+          "auth/popup-blocked": "Your browser blocked the popup — allow popups and try again.",
+          "auth/unauthorized-domain": "This domain isn't authorized for sign-in.",
+          "auth/network-request-failed": "Network error — check your connection and try again.",
+          "auth/invalid-api-key": "App configuration error — Firebase keys are missing.",
+        };
+        toast.error(
+          messages[error.code] || `Google sign-in failed (${error.code || "unknown error"})`
+        );
+      });
   };
 
   return (
