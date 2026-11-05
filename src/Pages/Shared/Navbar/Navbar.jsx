@@ -1,15 +1,25 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { FaBars, FaHeart, FaMoon, FaSun, FaXmark } from "react-icons/fa6";
+import {
+  FaBars,
+  FaBookOpen,
+  FaCrown,
+  FaHeart,
+  FaMoon,
+  FaSun,
+  FaXmark,
+} from "react-icons/fa6";
 import { FiLogOut } from "react-icons/fi";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
+import useRole from "../../../Hooks/useRole";
 import { useTheme } from "../../../Hooks/useTheme";
 import useWishlist from "../../../Hooks/useWishlist";
 import Navs from "./Navs";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  const { role, isAdmin } = useRole();
   const { changeTheme, mode } = useTheme();
   const { count } = useWishlist();
   const [scrolled, setScrolled] = useState(false);
@@ -39,12 +49,12 @@ const Navbar = () => {
       <div className="container mx-auto flex h-16 items-center justify-between px-3 md:h-[72px]">
         {/* brand */}
         <Link to="/" className="flex items-center gap-2">
-          <motion.img
+          <motion.span
             whileHover={{ rotate: -10, scale: 1.08 }}
-            className="w-7 md:w-8"
-            src="https://i.ibb.co/64HpLpj/bb-logo-png.png"
-            alt="BookBeacon logo"
-          />
+            className="grid size-8 place-items-center rounded-xl bg-gradient-to-br from-brand-600 to-brand-900 text-sm text-white shadow-soft md:size-9 md:text-base"
+          >
+            <FaBookOpen />
+          </motion.span>
           <p className="font-display text-xl font-bold md:text-2xl">
             <span className="text-brand-700 dark:text-brand-300">Book</span>
             <span className="text-sage-500 dark:text-sage-400">Beacon</span>
@@ -102,11 +112,17 @@ const Navbar = () => {
                 className="btn btn-circle btn-ghost avatar ring-2 ring-brand-500/40 ring-offset-2 ring-offset-base-100 transition hover:ring-brand-500"
               >
                 <div className="w-9 rounded-full">
-                  <img
-                    src={user.photoURL || "https://i.ibb.co/64HpLpj/bb-logo-png.png"}
-                    alt={user.displayName || "profile"}
-                    referrerPolicy="no-referrer"
-                  />
+                  {user.photoURL ? (
+                    <img
+                      src={user.photoURL}
+                      alt={user.displayName || "profile"}
+                      referrerPolicy="no-referrer"
+                    />
+                  ) : (
+                    <span className="grid h-full w-full place-items-center bg-brand-700 font-bold text-white">
+                      {(user.displayName || user.email || "R")[0].toUpperCase()}
+                    </span>
+                  )}
                 </div>
               </label>
               <div
@@ -115,6 +131,15 @@ const Navbar = () => {
               >
                 <p className="font-bold">{user.displayName || "Reader"}</p>
                 <p className="truncate text-xs text-base-content/60">{user.email}</p>
+                <span
+                  className={`mt-2 inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide ${
+                    isAdmin
+                      ? "bg-gold-500/20 text-gold-600 dark:text-gold-400"
+                      : "bg-brand-700/10 text-brand-700 dark:bg-brand-300/10 dark:text-brand-300"
+                  }`}
+                >
+                  {isAdmin && <FaCrown />} {role}
+                </span>
                 <div className="my-3 h-px bg-base-300" />
                 <Link
                   to="/borrowedBooks"

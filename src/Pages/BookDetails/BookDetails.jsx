@@ -14,7 +14,9 @@ import Swal from "sweetalert2";
 import { API_URL } from "../../api";
 import BookCover from "../../Components/BookCover";
 import Loading from "../../Components/Loading";
-import { PageTransition } from "../../Components/Motion";
+import { PageTransition, Reveal, Section } from "../../Components/Motion";
+import SectionHeading from "../../Components/SectionHeading";
+import { getBookExtras } from "../../data/bookExtras";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useWishlist from "../../Hooks/useWishlist";
@@ -49,6 +51,14 @@ const BookDetails = () => {
   const previouslyBorrowed = data?.userData?.find((b) => b.name === name);
   const saved = has(_id);
   const available = Number(quant) > 0;
+
+  // richer content for well-known titles; falls back to the stored blurb
+  const extras = getBookExtras(name);
+  const fullSummary = extras?.summary || summary;
+  const reviews = extras?.reviews || [];
+  const avgReview = reviews.length
+    ? (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1)
+    : null;
 
   const handleModal = () => document.getElementById(`${_id}`).showModal();
 
@@ -159,9 +169,11 @@ const BookDetails = () => {
               </span>
             </div>
 
-            {summary && (
+            {fullSummary && (
               <p className="mt-6 max-w-2xl leading-relaxed text-base-content/70">
-                {summary.length > 280 ? `${summary.slice(0, 280)}…` : summary}
+                {fullSummary.length > 280
+                  ? `${fullSummary.slice(0, 280)}…`
+                  : fullSummary}
               </p>
             )}
 
@@ -205,6 +217,64 @@ const BookDetails = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* about this book */}
+      {fullSummary && fullSummary.length > 280 && (
+        <Section className="container mx-auto px-4 pt-16">
+          <Reveal className="mx-auto max-w-3xl">
+            <h2 className="font-display text-2xl font-bold md:text-3xl">
+              About this <span className="text-gradient">book</span>
+            </h2>
+            <p className="mt-4 leading-relaxed text-base-content/70">
+              {fullSummary}
+            </p>
+          </Reveal>
+        </Section>
+      )}
+
+      {/* reader reviews */}
+      {reviews.length > 0 && (
+        <Section className="container mx-auto px-4 py-16">
+          <SectionHeading
+            eyebrow="From our readers"
+            title={
+              <>
+                Reader <span className="text-gradient">Reviews</span>
+              </>
+            }
+            subtitle={`${reviews.length} reviews · averaging ${avgReview} / 5 for this title`}
+          />
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {reviews.map((review, i) => (
+              <Reveal key={review.name} delay={i * 0.08}>
+                <div className="surface flex h-full flex-col p-6 hover:shadow-lift">
+                  <div className="flex items-center gap-3">
+                    <span className="grid size-11 shrink-0 place-items-center rounded-full bg-gradient-to-br from-brand-600 to-brand-900 font-bold text-white">
+                      {review.name[0]}
+                    </span>
+                    <div>
+                      <p className="font-semibold leading-tight">{review.name}</p>
+                      <p className="text-xs text-base-content/50">
+                        {new Date(review.date).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                      </p>
+                    </div>
+                  </div>
+                  <span className="mt-3 text-sm text-gold-500">
+                    <BookRating rating={review.rating} />
+                  </span>
+                  <p className="mt-3 text-sm leading-relaxed text-base-content/70">
+                    “{review.text}”
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </Section>
+      )}
 
       {/* borrow modal */}
       <dialog id={`${_id}`} className="modal">

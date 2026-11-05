@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { FaHeart, FaPen, FaRegHeart } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import useRole from "../Hooks/useRole";
 import useWishlist from "../Hooks/useWishlist";
 import BookRating from "../Pages/CategoryCollection/BookRating";
 import BookCover from "./BookCover";
@@ -9,10 +10,12 @@ import { fadeUp } from "./Motion";
 /**
  * Shared book card.
  * variant="grid" (default) — cover on top; variant="row" — cover on the left
+ * The Update action only renders for admins.
  */
 const BookCard = ({ book, showUpdate = false, variant = "grid" }) => {
   const { _id, authorName, image, name, category, rating, quantity } = book || {};
   const { has, toggle } = useWishlist();
+  const { isAdmin } = useRole();
   const saved = has(_id);
   const available = Number(quantity) > 0;
 
@@ -106,7 +109,7 @@ const BookCard = ({ book, showUpdate = false, variant = "grid" }) => {
             <span className="text-gold-500">
               <BookRating rating={rating} />
             </span>
-            {showUpdate ? (
+            {showUpdate && isAdmin ? (
               <Link
                 to={`/UpdateBook/${_id}`}
                 className="btn btn-outline btn-sm gap-1.5 rounded-xl border-brand-700/40 text-brand-700 hover:border-brand-700 hover:bg-brand-700 hover:text-white dark:border-brand-300/40 dark:text-brand-300"

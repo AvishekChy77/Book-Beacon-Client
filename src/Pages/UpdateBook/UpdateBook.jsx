@@ -4,8 +4,10 @@ import { FaFloppyDisk } from "react-icons/fa6";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { API_URL } from "../../api";
+import EmptyState from "../../Components/EmptyState";
 import { PageTransition } from "../../Components/Motion";
 import PageBanner from "../../Components/PageBanner";
+import useRole from "../../Hooks/useRole";
 
 const CATEGORIES = [
   "Fiction",
@@ -16,9 +18,30 @@ const CATEGORIES = [
 
 const UpdateBook = () => {
   const book = useLoaderData();
+  const { isAdmin } = useRole();
   const { _id, name, authorName, category, image, rating } = book;
   const [preview, setPreview] = useState(image);
   const navigate = useNavigate();
+
+  if (!isAdmin) {
+    return (
+      <PageTransition className="container mx-auto px-4 pb-20">
+        <PageBanner
+          eyebrow="Librarians only"
+          title="Update Book"
+          subtitle="This area is reserved for library admins."
+          crumbs={["Update Book"]}
+        />
+        <EmptyState
+          icon="🔒"
+          title="Admins only"
+          message="Only library admins can edit book records. Browse the collection instead."
+          actionText="Back to all books"
+          actionTo="/allBooks"
+        />
+      </PageTransition>
+    );
+  }
 
   const handleUpdate = (e) => {
     e.preventDefault();
