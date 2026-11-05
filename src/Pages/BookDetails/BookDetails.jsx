@@ -12,6 +12,7 @@ import {
 import { Link, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { API_URL } from "../../api";
+import BookCover from "../../Components/BookCover";
 import Loading from "../../Components/Loading";
 import { PageTransition } from "../../Components/Motion";
 import useAuth from "../../Hooks/useAuth";
@@ -112,13 +113,17 @@ const BookDetails = () => {
             className="relative mx-auto w-64 sm:w-72 lg:w-full lg:max-w-sm"
           >
             <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-brand-500/30 to-sage-400/30 blur-2xl" />
-            <motion.img
+            <motion.div
               whileHover={{ scale: 1.03, rotate: 1 }}
               transition={{ duration: 0.4 }}
-              src={image}
-              alt={name}
-              className="w-full rounded-3xl shadow-lift"
-            />
+              className="overflow-hidden rounded-3xl shadow-lift"
+            >
+              <BookCover
+                src={image}
+                alt={name}
+                className="aspect-[2/3] w-full object-cover"
+              />
+            </motion.div>
             <span
               className={`absolute -right-3 -top-3 rounded-full px-4 py-1.5 text-xs font-bold text-white shadow-soft ${
                 available ? "bg-emerald-500" : "bg-rose-500"

@@ -10,8 +10,20 @@ const icons = {
   "Science Fiction & Fantasy": "🚀",
 };
 
+// The image URLs stored in the category collection point to an expired image
+// host, so each genre gets a curated CDN-optimized image instead.
+const IMG = (id) =>
+  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=700&q=60`;
+const images = {
+  Fiction: IMG("photo-1474932430478-367dbb6832c1"),
+  "Mystery & Thriller": IMG("photo-1509248961158-e54f6934749c"),
+  "Non-Fiction": IMG("photo-1456513080510-7bf3a84b82f8"),
+  "Science Fiction & Fantasy": IMG("photo-1419242902214-272b3f66ee7a"),
+};
+
 const Category = ({ category }) => {
-  const { _id, image, category: name } = category;
+  const { _id, category: name } = category;
+  const image = images[name] || category.image;
 
   return (
     <motion.div variants={fadeUp} whileHover={{ y: -8 }} className="group h-full">

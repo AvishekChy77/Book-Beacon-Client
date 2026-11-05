@@ -3,6 +3,7 @@ import { FaHeart, FaPen, FaRegHeart } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import useWishlist from "../Hooks/useWishlist";
 import BookRating from "../Pages/CategoryCollection/BookRating";
+import BookCover from "./BookCover";
 import { fadeUp } from "./Motion";
 
 /**
@@ -51,10 +52,9 @@ const BookCard = ({ book, showUpdate = false, variant = "grid" }) => {
         >
           <div className="relative w-36 shrink-0 overflow-hidden sm:w-40">
             {Availability}
-            <img
+            <BookCover
               src={image}
               alt={name}
-              loading="lazy"
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           </div>
@@ -86,10 +86,9 @@ const BookCard = ({ book, showUpdate = false, variant = "grid" }) => {
           {Availability}
           {Heart}
           <div className="h-60 overflow-hidden bg-base-300/40">
-            <img
+            <BookCover
               src={image}
               alt={name}
-              loading="lazy"
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
           </div>

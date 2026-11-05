@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FaCalendarDay, FaRotateLeft } from "react-icons/fa6";
 import Swal from "sweetalert2";
 import { API_URL } from "../../api";
+import BookCover from "../../Components/BookCover";
 import EmptyState from "../../Components/EmptyState";
 import { GridSkeleton } from "../../Components/Loading";
 import { fadeUp, PageTransition, stagger } from "../../Components/Motion";
@@ -117,10 +118,9 @@ const BorrowedBooks = () => {
                 className="surface group flex overflow-hidden p-0 hover:shadow-lift"
               >
                 <div className="relative w-32 shrink-0 overflow-hidden sm:w-36">
-                  <img
+                  <BookCover
                     src={book.image}
                     alt={book.name}
-                    loading="lazy"
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
